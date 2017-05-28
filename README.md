@@ -1,5 +1,12 @@
 # Hand-in-6-Security
+#### The exercise for this period is here: [Security Exercise](https://docs.google.com/document/d/1ZY-pZDQfwEoQlVk0Qn-lKnpa40MOl-hQdGW9Fx2A5XE/edit)
 
+#### Instructions
+- TBD
+- TBD
+
+
+## Learning goals:
 >## Explain basic security terms like authentication, authorization, confidentiality, integrity, SSL/TLS and provide examples of how you have used them.
 
 ---
