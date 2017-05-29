@@ -4,16 +4,15 @@ import { observer } from 'mobx-react'
 import FormedBooks from './FormedBooks'
 
 
-const Products = observer((props) => {
+const Product = observer((props) => {
 
-  let books = props.bookStore.getBooks()
+  var books = props.bookStore.getBooks()
   if (books == null) books = []
   const MappedBooks = books.map((book) => {
     return (
       <li key={book.id}>
-        <p>
-        {book.title} - 
-        <Link to={`products/details/${book.id}`}> (details)</Link>
+        <p> 
+          {book.title} <Link to={`products/details/${book.id}`}>(details)</Link>
         </p>
       </li>
     )
@@ -32,4 +31,4 @@ const Products = observer((props) => {
   )
 })
 
-export default Products
+export default Product

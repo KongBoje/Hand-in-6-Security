@@ -2,18 +2,20 @@ import React from 'react'
 import { observer } from 'mobx-react'
 import './models/BookStore'
 
-const Update = observer(({bookStore, book}) => {
+const Update = observer(({bookStore, book, reRender}) => {
 
-    function handleSubmit(evt) {
-        evt.preventDefault()
-        const target = evt.target
+    function handleSubmit(e) {
+        e.preventDefault()
+        const target = e.target
         var updatedBook = {}
         updatedBook.id = book.id
         updatedBook.title = target.title.value
         updatedBook.info = target.info.value
         updatedBook.moreInfo = target.moreInfo.value
         bookStore.updateBook(updatedBook)
-        location.reload()
+        setTimeout(function() {
+            reRender()
+        }, 1500);
     }
 
     let title = book.title

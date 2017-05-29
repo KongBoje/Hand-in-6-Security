@@ -6,12 +6,12 @@ import Update from './Update'
 //@observer
 class Details extends React.Component {
 
-  constructor(props) {
-    super(props)
-  }
-
   deleteBooks = () => {
     this.props.bookStore.deleteBook(this.props.id)
+  }
+
+  reRender = () => {
+    this.forceUpdate()
   }
 
   render() {
@@ -36,14 +36,16 @@ class Details extends React.Component {
           <h4> {book.info}</h4>
           <h4>{book.moreInfo}</h4>
           <br />
-          <Link to="/products">Products</Link>
+          <div>
+            <Link to="/products">Products</Link>
+          </div>
+          <div>
+            <button type="button" className="btn btn-danager">
+              <Link to="/products" onClick={this.deleteBooks}>Delete Book</Link>
+            </button>
+          </div>
         </div>
-        <div>
-          <button type="button" className="btn btn-danager">
-            <Link to="/products" onClick={this.deleteBooks}>Delete Book</Link>
-          </button>
-        </div>
-        <Update bookStore={this.props.bookStore} book={book} />
+        <Update reRender={this.reRender} bookStore={this.props.bookStore} book={book} />
       </div>
     );
   }

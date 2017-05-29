@@ -1,7 +1,7 @@
 import React from 'react'
 import Home from './Home'
 import Blog from './Blog'
-import Products from './Products'
+import Products from './Product'
 import Details from './Details'
 import Company from './Company'
 import App from './App'
@@ -11,23 +11,23 @@ import { Router, hashHistory, IndexRoute, Route } from 'react-router'
 
 //@observer
 class RouterComponent extends React.Component {
-    
-    constructor(props) {
-        super(props)
+
+    reRender = () => {
+        this.forceUpdate()
     }
 
     render() {
-        let bookStore = this.props.bookStore;
+        var bookStore = this.props.bookStore;
         return (
             <div>
                 <Router history={hashHistory}>
                     <Route path="/" component={App}>
                         <IndexRoute component={Home}></IndexRoute>
-                        <Route path="products" component={() => (<Products bookStore={bookStore}/>)}></Route>
-                        <Route path="products/details/:id" render={(props) => (<Details bookStore={bookStore} id={props.match.params.id} />)} ></Route>
-                        <Route path="company" component={Company} />
-                        <Route path="blog" component={Blog} />
-                        <Route path="*" component={NotFoundPage} />
+                        <Route path="/product" component={() => (<Products bookStore={bookStore}/>)}></Route>
+                        <Route path="/products/details/:id" render={(props) =>( <Details bookStore={this.props.bookStore} id={props.match.params.id} />)} ></Route>
+                        <Route path="/company" component={Company} />
+                        <Route path="/blog" component={Blog} />
+                        <Route path="/*" component={NotFoundPage} />
                     </Route>
                 </Router>
             </div>
