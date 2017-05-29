@@ -8,6 +8,7 @@
 - Helmet is used a little in the backend express server.
 - To test the security, try adding a book without being logged in, then try it again while logged in. Update and delete is added aswell but for some reason it won't show the details window, will try and fix it later some day.
 - The backend and the frontend has been checked with [nsp](https://nodesecurity.io/), here is the proof:
+
 backend/frontend:
 
 
