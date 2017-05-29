@@ -14,19 +14,6 @@ var passportJWT = require('passport-jwt');
 var ExtractJwt = passportJWT.ExtractJwt;
 var JwtStrategy = passportJWT.Strategy;
 
-/*var users = [
-    {
-        id: 1,
-        name: 'michael',
-        password: '12f34'
-    },
-    {
-        id: 2,
-        name: 'Bob',
-        password: 'Bob'
-    }
-]; */
-
 var jwtOptions = {}
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeader();
 jwtOptions.secretOrKey = 'I like a lot of games';
