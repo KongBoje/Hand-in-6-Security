@@ -3,7 +3,7 @@
 
 ### Instructions
 - The first thing you have to do is run a local mongoDB, when that is done run the file createDummyUser.js inside the rout-ex-react-back. This creates two users: `username: Michael, password: mich123` and `username: Christian, password: chris321`.
-- bcrypt is used for the passwords to hash them and then salted like descriped [here](https://stackoverflow.com/questions/6832445/how-can-bcrypt-have-built-in-salts)
+- bcrypt is used for the passwords to hash them and then salted like described [here](https://stackoverflow.com/questions/6832445/how-can-bcrypt-have-built-in-salts)
 - JWT is used for this application. The serversecret is inside the index.js file and isn't hidden, will be later on.
 - Helmet is used a little in the backend express server.
 - To test the security, try adding a book without being logged in, then try it again while logged in. Update and delete is added aswell but for some reason it won't show the details window, will try and fix it later some day.
