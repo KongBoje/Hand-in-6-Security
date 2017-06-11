@@ -35,18 +35,35 @@ The Transport Layer Security protocol aims primarily to provide privacy and data
  
 #### Example is the big exercise seed we have made for this period: [Seed-exercise](https://github.com/KongBoje/Hand-in-6-Security/tree/master/ReactExRoutBooksAuth).
 
-
 ---
 
 >## Explain, at a fundamental level, the technologies involved, and the steps required, to setup a SSL connection between a browser and a server, and how to use SSL in a secure way.
+
+TBD
 
 ---
 
 >## How can we "prevent" third party code used, by either our Java or NodeJS applications, from injecting dangerous code into our code base?
 
+By removing code tags from text. Dont let users try to insert code into the database.
+
 ---
 
 >## Explain about Node tools like Helmet and nsp (and the Node Security Project). What do they do, and how have you used them.
+
+#### Helmet
+TBD
+
+#### NSP
+NSP stands for Node Security Platform, which adds security checks right into your pull requests. 
+
+Homepage: [NSP](https://nodesecurity.io/)
+
+NSP checks the list of middleware and can know if there are vulnerabilities in them. 
+Use "NSP CHECK" to check.
+ 
+Nsp check example:
+![Nsp check!](nspPicture.jpg)
 
 ---
 
