@@ -51,12 +51,11 @@ By removing code tags from text. Dont let users try to insert code into the data
 
 >## Explain about Node tools like Helmet and nsp (and the Node Security Project). What do they do, and how have you used them.
 
-#### Helmet
+#### Helmet:
 TBD
 
-#### NSP
-NSP stands for Node Security Platform, which adds security checks right into your pull requests. 
-
+#### NSP:
+NSP stands for Node Security Platform, which adds security checks right into your pull requests.<br />
 Homepage: [NSP](https://nodesecurity.io/)
 
 NSP checks the list of middleware and can know if there are vulnerabilities in them. 
