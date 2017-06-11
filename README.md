@@ -85,18 +85,39 @@ NoSQL Injection is the equivalent for the NoSQL world. The attack tries to injec
 For example, using Node.js and MongoDB:
 ![JS1](javaS1.jpg)
 
+Let's suppose that we receive the following request:
+![JS2](javaS2.jpg)
+
+As **$ne** is the "not equal" operator, this request would return the first user (possibly an admin) without knowing its name or password.
+The solution in this case is to sanitize(or to clean) the input before using them. A good options is [mongo-sanitize](https://github.com/vkarpov15/mongo-sanitize):
+![JS3](javaS3.jpg)
+
+If you are using Mongoose, you don't need to sanitize the inputs. In this case, you just need to set the properties to be typed as string. If someone passes an object like **{ $ne: null }**, Mongoose will convert it to a string and no harm will be done.
+ 
+#### DOS attacks: 
+Denial of service is what makes a service very slow.
+**ISPS**(International Ship and Port Facility Security) may have to “null route” the victim, there is not much you can do.
+You can try banning/filtering ips but it will only cut down on the traffic, not stop it.
+
+
 ---
 
 >## Explain and demonstrate ways to protect user passwords on our backend, and why this is necessary.
+Hashing and salting. Hashing goes one way, so you cannot recover a password just by looking at the hash. But you can make a database of hashes and the source passwords to try to recover them. Salting passwords means they all need a new hash, and it will be harder to create such a database of hashes.
 
 ---
 
 >## Explain about password hashing, salts and the difference between Bcrypt and older (not suited) algorithms like sha1, md5 etc.
+Bcrypt is like sha1 and md5, but much slower. This makes it more time consuming to crack hashes.
 
 ---
 
 >## Explain about JSON Web Tokens (jwt) and why they are extremely suited for a REST-based API
+JSON Web Token (JWT) is a JSON-based open standard for creating access tokens that assert some number of claims. For example, a server could generate a token that has the claim "logged in as admin" and provide that to a client. The client could then use that token to prove that it is logged in as admin. The tokens are signed by the server's key, so the client and server are both able to verify that the token is legitimate. The tokens are designed to be compact, URL-safe and usable especially in web browser single sign-on (SSO) context. JWT claims can be typically used to pass identity of authenticated users between an identity provider and a service provider, or any other type of claims as required by business processes. The tokens can also be authenticated and encrypted.
 
 ---
 
 >## Explain and demonstrate a basic NodeJS/React application and how it handles authentication, authorization, prevents against Cross Site Scripting and other basic web-threats.
+We haven’t made one that prevents XSS but to do it you should ensure you don’t let people put plain code into your database.
+
+The app is here: [Seed-Exercise](https://github.com/KongBoje/Hand-in-6-Security/tree/master/ReactExRoutBooksAuth)
