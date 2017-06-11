@@ -82,10 +82,10 @@ Yes it is.
 
 NoSQL Injection is the equivalent for the NoSQL world. The attack tries to inject code when the inputs are not sanitized and the solution is simply to sanitize them before using.
 
-For example, using Node.js and MongoDB:
+For example, using Node.js and MongoDB:<br />
 ![JS1](javaS1.jpg)
 
-Let's suppose that we receive the following request:
+Let's suppose that we receive the following request:<br />
 ![JS2](javaS2.jpg)
 
 As **$ne** is the "not equal" operator, this request would return the first user (possibly an admin) without knowing its name or password.
