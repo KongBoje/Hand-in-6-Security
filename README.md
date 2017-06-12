@@ -54,7 +54,6 @@ Once the connection is established, both parties can use the agreed algorithm an
  
 The client generates a random key to be used for the main, symmetric algorithm. It encrypts it using an algorithm also agreed upon during the Hello phase, and the server’s public key (found on its SSL certificate). It sends this encrypted key to the server, where it is decrypted using the server’s private key, and the interesting parts of the handshake are complete. The parties are sufficiently happy that they are talking to the right person, and have secretly agreed on a key to symmetrically encrypt the data that they are about to send each other. HTTP requests and responses can now be sent by forming a plaintext message and then encrypting and sending it. The other party is the only one who knows how to decrypt this message, and so Man In The Middle Attackers are unable to read or modify any requests that they may intercept.
 
-
 ---
 
 >## How can we "prevent" third party code used, by either our Java or NodeJS applications, from injecting dangerous code into our code base?
@@ -70,7 +69,7 @@ Helmet can help protect your app from some well-known web vulnerabilities by set
 
 Helmet is actually just a collection of nine smaller middleware functions that set security-related HTTP headers:
 - **csp** sets the Content-Security-Policy header to help prevent cross-site scripting attacks and other cross-site injections.
-- **hidePoweredBy** removes the X-Powered-By header.
+- **hidePoweredBy** removes the X-Powered-By header (Attackers can use this header (which is enabled by default) to detect apps running Express and then launch specifically-targeted attacks).
 - **hpkp** Adds Public Key Pinning headers to prevent man-in-the-middle attacks with forged certificates.
 - **hsts** sets Strict-Transport-Security header that enforces secure (HTTP over SSL/TLS) connections to the server.
 - **ieNoOpen** sets X-Download-Options for IE8+.
