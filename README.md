@@ -10,7 +10,7 @@
 - The backend and the frontend has been checked with [nsp](https://nodesecurity.io/), here is the proof:
 
 backend/frontend:
-![Nsp check!](nspPicture.jpg)
+![Nsp check!](pictures/nspPicture.jpg)
 
 
 ## Learning goals:
@@ -38,21 +38,63 @@ The Transport Layer Security protocol aims primarily to provide privacy and data
 ---
 
 >## Explain, at a fundamental level, the technologies involved, and the steps required, to setup a SSL connection between a browser and a server, and how to use SSL in a secure way.
+![SSL](pictures/SSL-connection.jpg)
 
-TBD
+An SSL connection between a client and server is set up by a handshake, the goals of which are:
+To satisfy the client that it is talking to the right server (and optionally visa versa)
+For the parties to have agreed on a “cipher suite”, which includes which encryption algorithm they will use to exchange data
+For the parties to have agreed on any necessary keys for this algorithm
+Once the connection is established, both parties can use the agreed algorithm and keys to securely send messages to each other. We will break the handshake up into 3 main phases - Hello, Certificate Exchange and Key Exchange.
+
+**Hello** - The handshake begins with the client sending a ClientHello message. This contains all the information the server needs in order to connect to the client via SSL, including the various cipher suites and maximum SSL version that it supports. The server responds with a ServerHello, which contains similar information required by the client, including a decision based on the client’s preferences about which cipher suite and version of SSL will be used.
+ 
+**Certificate Exchange** - Now that contact has been established, the server has to prove its identity to the client. This is achieved using its SSL certificate, which is a very tiny bit like its passport. An SSL certificate contains various pieces of data, including the name of the owner, the property (eg. domain) it is attached to, the certificate’s public key, the digital signature and information about the certificate’s validity dates. The client checks that it either implicitly trusts the certificate, or that it is verified and trusted by one of several Certificate Authorities (CAs) that it also implicitly trusts. Much more about this shortly. Note that the server is also allowed to require a certificate to prove the client’s identity, but this typically only happens in very sensitive applications.
+ 
+**Key Exchange** - The encryption of the actual message data exchanged by the client and server will be done using a symmetric algorithm, the exact nature of which was already agreed during the Hello phase. A symmetric algorithm uses a single key for both encryption and decryption, in contrast to asymmetric algorithms that require a public/private key pair. Both parties need to agree on this single, symmetric key, a process that is accomplished securely using asymmetric encryption and the server’s public/private keys.
+ 
+The client generates a random key to be used for the main, symmetric algorithm. It encrypts it using an algorithm also agreed upon during the Hello phase, and the server’s public key (found on its SSL certificate). It sends this encrypted key to the server, where it is decrypted using the server’s private key, and the interesting parts of the handshake are complete. The parties are sufficiently happy that they are talking to the right person, and have secretly agreed on a key to symmetrically encrypt the data that they are about to send each other. HTTP requests and responses can now be sent by forming a plaintext message and then encrypting and sending it. The other party is the only one who knows how to decrypt this message, and so Man In The Middle Attackers are unable to read or modify any requests that they may intercept.
 
 ---
 
 >## How can we "prevent" third party code used, by either our Java or NodeJS applications, from injecting dangerous code into our code base?
 
-By removing code tags from text. Dont let users try to insert code into the database.
+By removing code tags from text. Don't let users try to insert code into the database.
+
+'Sanitization' is the removal of malicious data from user input, such as form submissions or maybe more simply...
+
+The cleaning of user input to avoid code-conflicts (duplicate ids for instance), security issues (xss codes etc), or other issues that might arise from non-standardized input & human error/deviance.
+
+Depending on the context, sanitization will take on a few different forms.<br />
+Could be as simple as removing vulgarities & odd symbols from text to removing SQL injection attempts and other malicious code intrusion attempts.
+
 
 ---
 
 >## Explain about Node tools like Helmet and nsp (and the Node Security Project). What do they do, and how have you used them.
 
 #### Helmet:
-TBD
+Helmet can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately.
+
+Helmet is actually just a collection of nine smaller middleware functions that set security-related HTTP headers:
+- **csp** sets the Content-Security-Policy header to help prevent cross-site scripting attacks and other cross-site injections.
+- **hidePoweredBy** removes the X-Powered-By header (Attackers can use this header (which is enabled by default) to detect apps running Express and then launch specifically-targeted attacks).
+- **hpkp** Adds Public Key Pinning headers to prevent man-in-the-middle attacks with forged certificates.
+- **hsts** sets Strict-Transport-Security header that enforces secure (HTTP over SSL/TLS) connections to the server.
+- **ieNoOpen** sets X-Download-Options for IE8+.
+- **noCache** sets Cache-Control and Pragma headers to disable client-side caching.
+- **noSniff** sets X-Content-Type-Options to prevent browsers from MIME-sniffing a response away from the declared content-type.
+- **frameguard** sets the X-Frame-Options header to provide clickjacking protection.
+- **xssFilter** sets X-XSS-Protection to enable the Cross-site scripting (XSS) filter in most recent web browsers.
+
+Install Helmet like any other module:<br />
+**$ npm install --save helmet**
+
+
+Then to use it in your code:
+```javascript
+var helmet = require('helmet')
+app.use(helmet())
+```
 
 #### NSP:
 NSP stands for Node Security Platform, which adds security checks right into your pull requests.<br />
@@ -62,7 +104,7 @@ NSP checks the list of middleware and can know if there are vulnerabilities in t
 Use "NSP CHECK" to check.
  
 Nsp check example:
-![Nsp check!](nspPicture.jpg)
+![Nsp check!](pictures/nspPicture.jpg)
 
 ---
 
@@ -83,32 +125,40 @@ Yes it is.
 NoSQL Injection is the equivalent for the NoSQL world. The attack tries to inject code when the inputs are not sanitized and the solution is simply to sanitize them before using.
 
 For example, using Node.js and MongoDB:<br />
-![JS1](javaS1.jpg)
+![JS1](pictures/javaS1.jpg)
 
 Let's suppose that we receive the following request:<br />
-![JS2](javaS2.jpg)
+![JS2](pictures/javaS2.jpg)
 
 As **$ne** is the "not equal" operator, this request would return the first user (possibly an admin) without knowing its name or password.
 The solution in this case is to sanitize(or to clean) the input before using them. A good options is [mongo-sanitize](https://github.com/vkarpov15/mongo-sanitize):
-![JS3](javaS3.jpg)
+![JS3](pictures/javaS3.jpg)
 
 If you are using Mongoose, you don't need to sanitize the inputs. In this case, you just need to set the properties to be typed as string. If someone passes an object like **{ $ne: null }**, Mongoose will convert it to a string and no harm will be done.
  
 #### DOS attacks: 
-Denial of service is what makes a service very slow.
-**ISPS**(International Ship and Port Facility Security) may have to “null route” the victim, there is not much you can do.
+Denial of service is what makes a service very slow.<br />
+DOS attacks mainly comes from bots or what you call zombie computers, which completely overflows the service with useless data.<br />
+**ISPs** (Internet Service Providers such as TDC) may have to “null route” the victim, there is not much you can do.<br />
 You can try banning/filtering ips but it will only cut down on the traffic, not stop it.
-
 
 ---
 
 >## Explain and demonstrate ways to protect user passwords on our backend, and why this is necessary.
+![Hash-salt](pictures/Hash-salt.jpg)
+
 Hashing and salting. Hashing goes one way, so you cannot recover a password just by looking at the hash. But you can make a database of hashes and the source passwords to try to recover them. Salting passwords means they all need a new hash, and it will be harder to create such a database of hashes.
 
 ---
 
 >## Explain about password hashing, salts and the difference between Bcrypt and older (not suited) algorithms like sha1, md5 etc.
-Bcrypt is like sha1 and md5, but much slower. This makes it more time consuming to crack hashes.
+SHA1 and MD5 are cryptographic hashing algorithms. It is basically a super weird representation of the string. The original information is there, but is scrambled into something unintelligible. They go only one way. You take a string like “computer” and it becomes “df53ca268240ca76670c8566ee54568a” in MD5. However you can actually just precompute all combination of these and make a database of solutions to hashes. If you salt the passwords, then someone would have to re-compute the entire set of hashes for that salt.
+ 
+SHA-1 produces a 160-bit (20-byte) hash value known as a message digest(the output aka. The hash value or hash)
+ 
+The MD5 algorithm is a widely used hash function producing a 128-bit hash value.
+ 
+Bcrypt is like sha1 and md5, but much slower. This makes it more time consuming to crack hashes. So there is actually no complete security, but the hackers will be held at bay for so long that it hopefully won’t matter by then (after maybe 100000 years)
 
 ---
 
@@ -118,6 +168,8 @@ JSON Web Token (JWT) is a JSON-based open standard for creating access tokens th
 ---
 
 >## Explain and demonstrate a basic NodeJS/React application and how it handles authentication, authorization, prevents against Cross Site Scripting and other basic web-threats.
-We haven’t made one that prevents XSS but to do it you should ensure you don’t let people put plain code into your database.
+Here we will show the exercise we made with the books, just with security now.
+ 
+The only thing we haven’t made on the project or exercise is that it can prevent XSS, but to do it you should ensure you don’t let people put plain code into your database.
 
 The app is here: [Seed-Exercise](https://github.com/KongBoje/Hand-in-6-Security/tree/master/ReactExRoutBooksAuth)
