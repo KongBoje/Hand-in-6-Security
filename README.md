@@ -10,7 +10,7 @@
 - The backend and the frontend has been checked with [nsp](https://nodesecurity.io/), here is the proof:
 
 backend/frontend:
-![Nsp check!](nspPicture.jpg)
+![Nsp check!](pictures/nspPicture.jpg)
 
 
 ## Learning goals:
