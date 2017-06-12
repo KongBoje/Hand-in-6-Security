@@ -58,7 +58,15 @@ The client generates a random key to be used for the main, symmetric algorithm. 
 
 >## How can we "prevent" third party code used, by either our Java or NodeJS applications, from injecting dangerous code into our code base?
 
-By removing code tags from text. Dont let users try to insert code into the database.
+By removing code tags from text. Don't let users try to insert code into the database.
+
+'Sanitization' is the removal of malicious data from user input, such as form submissions or maybe more simply...
+
+The cleaning of user input to avoid code-conflicts (duplicate ids for instance), security issues (xss codes etc), or other issues that might arise from non-standardized input & human error/deviance.
+
+Depending on the context, sanitization will take on a few different forms.<br />
+Could be as simple as removing vulgarities & odd symbols from text to removing SQL injection attempts and other malicious code intrusion attempts.
+
 
 ---
 
@@ -129,14 +137,16 @@ The solution in this case is to sanitize(or to clean) the input before using the
 If you are using Mongoose, you don't need to sanitize the inputs. In this case, you just need to set the properties to be typed as string. If someone passes an object like **{ $ne: null }**, Mongoose will convert it to a string and no harm will be done.
  
 #### DOS attacks: 
-Denial of service is what makes a service very slow.
-DOS attacks mainly comes from bots or what you call zombie computers, which completely overflows the service with useless data.
-**ISPs** (Internet Service Providers such as TDC) may have to “null route” the victim, there is not much you can do
+Denial of service is what makes a service very slow.<br />
+DOS attacks mainly comes from bots or what you call zombie computers, which completely overflows the service with useless data.<br />
+**ISPs** (Internet Service Providers such as TDC) may have to “null route” the victim, there is not much you can do.<br />
 You can try banning/filtering ips but it will only cut down on the traffic, not stop it.
 
 ---
 
 >## Explain and demonstrate ways to protect user passwords on our backend, and why this is necessary.
+![Hash-salt](pictures/Hash-salt.jpg)
+
 Hashing and salting. Hashing goes one way, so you cannot recover a password just by looking at the hash. But you can make a database of hashes and the source passwords to try to recover them. Salting passwords means they all need a new hash, and it will be harder to create such a database of hashes.
 
 ---
@@ -158,6 +168,8 @@ JSON Web Token (JWT) is a JSON-based open standard for creating access tokens th
 ---
 
 >## Explain and demonstrate a basic NodeJS/React application and how it handles authentication, authorization, prevents against Cross Site Scripting and other basic web-threats.
-We haven’t made one that prevents XSS but to do it you should ensure you don’t let people put plain code into your database.
+Here we will show the exercise we made with the books, just with security now.
+ 
+The only thing we haven’t made on the project or exercise is that it can prevent XSS, but to do it you should ensure you don’t let people put plain code into your database.
 
 The app is here: [Seed-Exercise](https://github.com/KongBoje/Hand-in-6-Security/tree/master/ReactExRoutBooksAuth)
