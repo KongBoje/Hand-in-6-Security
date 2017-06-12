@@ -130,7 +130,8 @@ If you are using Mongoose, you don't need to sanitize the inputs. In this case, 
  
 #### DOS attacks: 
 Denial of service is what makes a service very slow.
-**ISPS**(International Ship and Port Facility Security) may have to “null route” the victim, there is not much you can do.
+DOS attacks mainly comes from bots or what you call zombie computers, which completely overflows the service with useless data.
+**ISPs** (Internet Service Providers such as TDC) may have to “null route” the victim, there is not much you can do
 You can try banning/filtering ips but it will only cut down on the traffic, not stop it.
 
 ---
@@ -141,7 +142,13 @@ Hashing and salting. Hashing goes one way, so you cannot recover a password just
 ---
 
 >## Explain about password hashing, salts and the difference between Bcrypt and older (not suited) algorithms like sha1, md5 etc.
-Bcrypt is like sha1 and md5, but much slower. This makes it more time consuming to crack hashes.
+SHA1 and MD5 are cryptographic hashing algorithms. It is basically a super weird representation of the string. The original information is there, but is scrambled into something unintelligible. They go only one way. You take a string like “computer” and it becomes “df53ca268240ca76670c8566ee54568a” in MD5. However you can actually just precompute all combination of these and make a database of solutions to hashes. If you salt the passwords, then someone would have to re-compute the entire set of hashes for that salt.
+ 
+SHA-1 produces a 160-bit (20-byte) hash value known as a message digest(the output aka. The hash value or hash)
+ 
+The MD5 algorithm is a widely used hash function producing a 128-bit hash value.
+ 
+Bcrypt is like sha1 and md5, but much slower. This makes it more time consuming to crack hashes. So there is actually no complete security, but the hackers will be held at bay for so long that it hopefully won’t matter by then (after maybe 100000 years)
 
 ---
 
