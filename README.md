@@ -187,6 +187,6 @@ JSON Web Token (JWT) is a JSON-based open standard for creating access tokens th
 >## Explain and demonstrate a basic NodeJS/React application and how it handles authentication, authorization, prevents against Cross Site Scripting and other basic web-threats.
 Here we will show the exercise we made with the books, just with security now.
  
-The only thing we haven’t made on the project or exercise is that it can prevent XSS, but to do it you should ensure you don’t let people put plain code into your database.
+We prevent against XSS with the **Helmet** node tool. Another way to prevent is to ensure you don’t let people put plain code into your database.
 
 The app is here: [Seed-Exercise](https://github.com/KongBoje/Hand-in-6-Security/tree/master/ReactExRoutBooksAuth)
