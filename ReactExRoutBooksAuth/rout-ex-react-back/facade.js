@@ -34,16 +34,23 @@ function addBook(book, callback) {
     })
 }
 
-function updateBook(id, book, callback) {
+function updateBook(book, callback) {
     let db = connection.get();
     let collection = db.collection("bookdb")
+    var options = {
+        returnOriginal: false,
+        upsert: true
+    }
 
-    collection.replaceOne({ "_id": new ObjectId(id) }, book, (err, data) => {
-        if (err) {
-            callback(err);
-        } else {
-            callback("Book edited was: " + data);
-        }
+    collection.replaceOne({ id: book.id }, 
+        {$set: {"id": book.id, "title": book.title, "info": book.info, "moreInfo": book.moreInfo}},
+        options,
+            (err, data) => {
+                if (err) {
+                    callback(err);
+                } else {
+                    callback("Book edited was: " + data.value);
+                }
     })
 }
 
@@ -52,7 +59,7 @@ function deleteBook(id, callback) {
     let db = connection.get();
     let collection = db.collection("bookdb")
 
-    collection.deleteOne({ "_id": new ObjectId(id) }, (err, data) => {
+    collection.deleteOne({ id: id }, (err, data) => {
         if (err) {
             callback(err)
         } else {

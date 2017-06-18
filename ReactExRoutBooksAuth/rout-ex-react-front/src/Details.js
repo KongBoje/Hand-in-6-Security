@@ -6,8 +6,13 @@ import Update from './Update'
 //@observer
 class Details extends React.Component {
 
+  constructor(props) {
+    super(props)
+    console.log("HER")
+  }
+
   deleteBooks = () => {
-    this.props.bookStore.deleteBook(this.props.id)
+    this.props.route.bookStore.deleteBook(this.props.routeParams.id)
   }
 
   reRender = () => {
@@ -15,8 +20,8 @@ class Details extends React.Component {
   }
 
   render() {
-    let id = this.props.id
-    let book = this.props.bookStore.getOneBook(id)
+    let id = this.props.routeParams.id
+    let book = this.props.route.bookStore.getOneBook(id)
 
     if (book == null) {
       setTimeout(() => {
@@ -37,15 +42,15 @@ class Details extends React.Component {
           <h4>{book.moreInfo}</h4>
           <br />
           <div>
-            <Link to="/products">Products</Link>
+            <Link to="/product">Products</Link>
           </div>
           <div>
             <button type="button" className="btn btn-danager">
-              <Link to="/products" onClick={this.deleteBooks}>Delete Book</Link>
+              <Link to="/product" onClick={this.deleteBooks}>Delete Book</Link>
             </button>
           </div>
         </div>
-        <Update reRender={this.reRender} bookStore={this.props.bookStore} book={book} />
+        <Update reRender={this.reRender} bookStore={this.props.route.bookStore} book={book} />
       </div>
     );
   }

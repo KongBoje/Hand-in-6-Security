@@ -12,6 +12,11 @@ import { Router, hashHistory, IndexRoute, Route } from 'react-router'
 //@observer
 class RouterComponent extends React.Component {
 
+    constructor(props) {
+        super(props)
+        console.log("rout constructor")
+    }
+
     reRender = () => {
         this.forceUpdate()
     }
@@ -24,7 +29,7 @@ class RouterComponent extends React.Component {
                     <Route path="/" component={App}>
                         <IndexRoute component={Home}></IndexRoute>
                         <Route path="/product" component={() => (<Products bookStore={bookStore}/>)}></Route>
-                        <Route path="/products/details/:id" render={(props) =>( <Details bookStore={this.props.bookStore} id={props.match.params.id} />)} ></Route>
+                        <Route path="products/details/:id" bookStore={bookStore} component={Details}></Route>
                         <Route path="/company" component={Company} />
                         <Route path="/blog" component={Blog} />
                         <Route path="/*" component={NotFoundPage} />

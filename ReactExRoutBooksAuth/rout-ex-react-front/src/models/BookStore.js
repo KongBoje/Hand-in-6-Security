@@ -19,12 +19,13 @@ class BookStore {
   }
 
   getOneBook = action((id) => {
+    console.log("BOOK HERE")
     if (this._books == null) {
       return null
     }
     var bookReturn;
     this._books.forEach((book, index) => {
-      if (book.id === id) {
+      if (book.id == id) {
         bookReturn = this._books[index]
       }
     })

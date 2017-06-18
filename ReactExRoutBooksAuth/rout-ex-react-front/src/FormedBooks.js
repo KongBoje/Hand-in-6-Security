@@ -1,9 +1,10 @@
 import React from 'react'
 
 class FormedBooks extends React.Component {
-    /*constructor(props) {
+    constructor(props) {
         super(props);
-    }*/
+        console.log("Formed")
+    }
 
     handleSubmit = (evt) => {
         evt.preventDefault()
