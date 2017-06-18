@@ -147,7 +147,24 @@ You can try banning/filtering ips but it will only cut down on the traffic, not 
 >## Explain and demonstrate ways to protect user passwords on our backend, and why this is necessary.
 ![Hash-salt](pictures/Hash-salt.jpg)
 
-Hashing and salting. Hashing goes one way, so you cannot recover a password just by looking at the hash. But you can make a database of hashes and the source passwords to try to recover them. Salting passwords means they all need a new hash, and it will be harder to create such a database of hashes.
+**Hashing and salting.** 
+
+**Hashes** are one-way functions that generate a representation, usually a number, of the data put in to them. They always generate the same hash from the same data, and there is no simple way to reverse the process.<br />
+you cannot recover a password just by looking at the hash.
+
+This makes them incredibly useful for password storage. Instead of storing a user's password, you can store the hash of the password.<br /> When a user logs in again, instead of checking the password they type in against the one you have stored, you calculate the hash of the password they type in and compare that to the stored hash.<br />
+It's possible though for you to make a database of hashes and the source passwords to try to recover them. 
+
+There are lots of different hashing algorythms, the most commonly used being MD5 and SHA1, but outdated compared to bcrypt.
+
+**Salting** is to hash more than just the user's password which means they all need a new hash, and it will be harder to create such a database of hashes.<br />
+For example, instead of storing a hash of a user's password, you could store the hash of their email address and their password together.
+
+This is effective because tables of hashes of generated data of more than about 10 characters start to become problematic to generate and store. At around that point, tables must be generated based upon dictionaries and known words, rather than on programatically generated lists of all possible passwords in a range.
+
+The average length of "email plus password" is easily in the region of 25 characters. Not only that, but if someone worked out that you were using hashes of "email plus password", they would still need to generate a new table for every password they wanted to dehash.
+
+This would make it too complex even for the more experienced hackers to try and extract data from.
 
 ---
 
