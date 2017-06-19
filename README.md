@@ -75,7 +75,7 @@ Could be as simple as removing vulgarities & odd symbols from text to removing S
 >## Explain about Node tools like Helmet and nsp (and the Node Security Project). What do they do, and how have you used them.
 
 #### Helmet:
-Helmet can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately.
+Helmet can help protect your app from some well-known web vulnerabilities(XSS) by setting HTTP headers appropriately.
 
 Helmet is actually just a collection of nine smaller middleware functions that set security-related HTTP headers:
 - **csp** sets the Content-Security-Policy header to help prevent cross-site scripting attacks and other cross-site injections.
