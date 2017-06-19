@@ -183,6 +183,7 @@ Bcrypt is like sha1 and md5, but much slower. This makes it more time consuming 
 
 >## Explain about JSON Web Tokens (jwt) and why they are extremely suited for a REST-based API
 JSON Web Token (JWT) is a JSON-based open standard for creating access tokens that assert some number of claims. For example, a server could generate a token that has the claim "logged in as admin" and provide that to a client. The client could then use that token to prove that it is logged in as admin. The tokens are signed by the server's key, so the client and server are both able to verify that the token is legitimate. The tokens are designed to be compact, URL-safe and usable especially in web browser single sign-on (SSO) context. JWT claims can be typically used to pass identity of authenticated users between an identity provider and a service provider, or any other type of claims as required by business processes. The tokens can also be authenticated and encrypted.
+Good in a REST-based API since you need a token to enter the specific routes and to use it's functionality.
 
 **Header**:<br />
 The header typically consists of two parts: the type of the token (=JWT), and the hashing algorithm being used (HMAC SHA256 or RSA)
@@ -217,6 +218,9 @@ HMACSHA256(
 
 **JWT**:
 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJPbmx5IE1lYW50IGZvciBhIEpXVCBkZW1vIiwiaXNzIjoibGFtQGNwaGJ1c2luZXNzLmRrIiwiaWF0IjoxNDk3ODkxNTg1LjM4MywiZXhwIjoxNDk3ODkxODg1LjM4Mywic3ViIjoibGFtIiwiYWRkaXRpb25hbCI6eyJhIjoiSGVsbG8gQ2xhc3MiLCJiIjoiSSBjYW4gYmFzaWNhbGx5IGFkZCAnd2hhdGV2ZXInIEkgbGlrZSBpbiBhIEpXVCJ9fQ.6dWzgF9jpuQgRCZaLjkQIpXiNKFr-UcOKyw1eoG43qw
+
+**Storage**:
+Can be stored with a cookie or the Web Storage (localStorage or sessionStorage).
 
 ---
 
