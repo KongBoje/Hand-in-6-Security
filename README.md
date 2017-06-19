@@ -18,6 +18,8 @@ backend/frontend:
 
 #### Authentication: 
 the process or action of proving or showing something to be true, genuine, or valid.
+
+authentication often involves verifying the validity of at least one form of identification. F.eks: Ensuring that a product is what its packaging and labeling claim to be.
  
 #### Authorization: 
 Authorization is the function of specifying access rights to resources related to information security and computer security in general and to access control in particular. More formally, "to authorize" is to define an access policy. For example, human resources staff is normally authorized to access employee records and this policy is usually formalized as access control rules in a computer system.
